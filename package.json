@@ -14,6 +14,7 @@
     "@emotion/styled": "^11.11.5",
     "@react-google-maps/api": "^2.19.3",
     "axios": "^1.7.2",
+    "cheerio": "^1.0.0-rc.12",
     "framer-motion": "^11.2.6",
     "leaflet": "^1.9.4",
     "millify": "^6.1.0",
