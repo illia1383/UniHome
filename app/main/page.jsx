@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from 'react';
-import { Flex, Box, Heading, Spinner } from '@chakra-ui/react';
+import { Flex, Box, Heading, Spinner, Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react';
 import { fetchApi } from '@/utils/fetchApi';
 import MapComponent from '@/components/Map';
 import Property from '@/components/Property';
@@ -12,6 +12,8 @@ const Main = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [filters, setFilters] = useState({ minPrice: '', maxPrice: '', bedrooms: '' });
+    const [activeTab, setActiveTab] = useState(0);
+    const [isMounted, setIsMounted] = useState(false);
 
     const fetchData = async () => {
         try {
@@ -44,6 +46,7 @@ const Main = () => {
 
     useEffect(() => {
         fetchData();
+        setIsMounted(true);
     }, []);
 
     useEffect(() => {
@@ -56,17 +59,27 @@ const Main = () => {
     return (
         <Flex direction="column" align="start" justify="center" width="100%">
             <Navbar setFilters={setFilters} />
-            <Flex direction="row" align="start" justify="center" width="100%">
-                <Box width="30%" overflowY="scroll" height="80vh" p={4}>
-                    <Heading mb={4}>Properties</Heading>
-                    {properties.map((property, index) => (
-                        <Property key={index} property={property} />
-                    ))}
-                </Box>
-                <Box width="70%" height="80vh">
-                    <MapComponent properties={properties} />
-                </Box>
-            </Flex>
+            <Tabs index={activeTab} onChange={(index) => setActiveTab(index)} width="100%">
+                <TabList>
+                    <Tab>Properties</Tab>
+                    <Tab>Map</Tab>
+                </TabList>
+                <TabPanels>
+                    <TabPanel>
+                        <Box overflowY="scroll" height="80vh" p={4}>
+                            <Heading mb={4}>Properties</Heading>
+                            {properties.map((property, index) => (
+                                <Property key={index} property={property} />
+                            ))}
+                        </Box>
+                    </TabPanel>
+                    <TabPanel>
+                        <Box height="80vh">
+                            <MapComponent properties={properties} isMounted={isMounted} />
+                        </Box>
+                    </TabPanel>
+                </TabPanels>
+            </Tabs>
         </Flex>
     );
 };
