@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from 'react';
-import { Flex, Box, Heading, Spinner, Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react';
+import { Flex, Box, Heading, Spinner, Tabs, TabList, TabPanels, Tab, TabPanel, useMediaQuery } from '@chakra-ui/react';
 import { fetchApi } from '@/utils/fetchApi';
 import MapComponent from '@/components/Map';
 import Property from '@/components/Property';
@@ -14,6 +14,7 @@ const Main = () => {
     const [filters, setFilters] = useState({ minPrice: '', maxPrice: '', bedrooms: '' });
     const [activeTab, setActiveTab] = useState(0);
     const [isMounted, setIsMounted] = useState(false);
+    const [isMobile] = useMediaQuery("(max-width: 768px)");
 
     const fetchData = async () => {
         try {
@@ -59,27 +60,41 @@ const Main = () => {
     return (
         <Flex direction="column" align="start" justify="center" width="100%">
             <Navbar setFilters={setFilters} />
-            <Tabs index={activeTab} onChange={(index) => setActiveTab(index)} width="100%">
-                <TabList>
-                    <Tab>Properties</Tab>
-                    <Tab>Map</Tab>
-                </TabList>
-                <TabPanels>
-                    <TabPanel>
-                        <Box overflowY="scroll" height="80vh" p={4}>
-                            <Heading mb={4}>Properties</Heading>
-                            {properties.map((property, index) => (
-                                <Property key={index} property={property} />
-                            ))}
-                        </Box>
-                    </TabPanel>
-                    <TabPanel>
-                        <Box height="80vh">
-                            <MapComponent properties={properties} isMounted={isMounted} />
-                        </Box>
-                    </TabPanel>
-                </TabPanels>
-            </Tabs>
+            {isMobile ? (
+                <Tabs index={activeTab} onChange={(index) => setActiveTab(index)} width="100%">
+                    <TabList>
+                        <Tab>Properties</Tab>
+                        <Tab>Map</Tab>
+                    </TabList>
+                    <TabPanels>
+                        <TabPanel>
+                            <Box overflowY="scroll" height="80vh" p={4}>
+                                <Heading mb={4}>Properties</Heading>
+                                {properties.map((property, index) => (
+                                    <Property key={index} property={property} />
+                                ))}
+                            </Box>
+                        </TabPanel>
+                        <TabPanel>
+                            <Box height="80vh">
+                                <MapComponent properties={properties} isMounted={isMounted} />
+                            </Box>
+                        </TabPanel>
+                    </TabPanels>
+                </Tabs>
+            ) : (
+                <Flex width="100%">
+                    <Box width="40%" overflowY="scroll" height="80vh" p={4}>
+                        <Heading mb={4}>Properties</Heading>
+                        {properties.map((property, index) => (
+                            <Property key={index} property={property} />
+                        ))}
+                    </Box>
+                    <Box width="60%" height="80vh">
+                        <MapComponent properties={properties} isMounted={isMounted} />
+                    </Box>
+                </Flex>
+            )}
         </Flex>
     );
 };
