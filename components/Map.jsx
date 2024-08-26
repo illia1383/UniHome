@@ -63,13 +63,13 @@ const MapComponent = ({ properties, isMounted }) => {
                             });
 
                             const infoWindowContent = `
-                                <div style="width: 300px;">
-                                    <h3 style="color: black; font-weight: bold;">${property.address}</h3>
-                                    <img src="${property.image}" alt="${property.address}" style="width: 100%; height: auto;"/>
-                                    <p style="color: black;">Price: $${property.price}</p>
-                                    <p style="color: black;">Bedrooms: ${property.bedrooms}</p>
-                                </div>
-                            `;
+                            <div style="width: 300px; font-family: Arial, sans-serif; border: 1px solid #ccc; border-radius: 8px; padding: 10px; background-color: #f9f9f9; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                            <h3 style="color: #333; font-weight: bold; margin-bottom: 8px; font-size: 18px;">${property.address}</h3>
+                            <img src="${property.image}" alt="${property.address}" style="width: 100%; height: auto; border: 2px solid #ddd; border-radius: 4px; margin-bottom: 10px;"/>
+                            <p style="color: #666; margin: 0 0 5px; font-size: 16px;"><strong>Price:</strong> $${property.price}</p>
+                            <p style="color: #666; margin: 0; font-size: 16px;"><strong>Bedrooms:</strong> ${property.bedrooms}</p>
+                        </div>
+                    `;
 
                             const infoWindow = new window.google.maps.InfoWindow({
                                 content: infoWindowContent,
