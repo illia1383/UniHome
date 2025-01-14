@@ -77,6 +77,12 @@ const MapComponent = ({ properties, isMounted }) => {
 
                             marker.addListener('click', () => {
                                 infoWindow.open(map, marker);
+                            // Center the map on the marker's position
+                            map.setCenter(marker.getPosition());
+
+                            // Zoom into the map for details
+                            map.setZoom(17); // Adjust the zoom level as needed
+
                             });
                         } else {
                             console.error('Geocode was not successful for the following reason: ' + status);
