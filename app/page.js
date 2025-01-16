@@ -18,7 +18,7 @@ export default function Home() {
       <Box paddingTop="250">
         <VStack spacing={4} align="center">
           <Heading as="h1" size="2xl">UniHomes</Heading>
-          <Text fontSize="xl">Find the right off-campus house for you!</Text>
+          <Text fontSize="xl">Housing Made Simple</Text>
           <Button colorScheme="teal" size="lg" onClick={handleButtonClick}>
             Find a Home
           </Button>
