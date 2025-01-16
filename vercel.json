@@ -1,7 +1,4 @@
 {
-    "functions": {
-      "api/listings/route.js": {}
-    },
     "crons": [
       {
         "path": "/api/listings",
