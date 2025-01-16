@@ -1,0 +1,14 @@
+{
+    "functions": {
+      "api/listings/route.js": {
+        "runtime": "nodejs18.x"
+      }
+    },
+    "cron": [
+      {
+        "path": "/api/listings",
+        "schedule": "0 */10 * * *" 
+      }
+    ]
+  }
+  
