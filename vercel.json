@@ -1,13 +1,11 @@
 {
     "functions": {
-      "api/listings/route.js": {
-        "runtime": "nodejs18.x"
-      }
+      "api/listings/route.js": {}
     },
     "crons": [
       {
         "path": "/api/listings",
-        "schedule": "0 0 * * *" 
+        "schedule": "0 0 * * *"
       }
     ]
   }
